@@ -1,8 +1,7 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
-import { Heart, Clock, HeartPulse } from "lucide-react";
+import { Heart, Clock, HeartPulse, Award, Target } from "lucide-react";
 
 interface HeartHealthProgramModalProps {
   open: boolean;
@@ -31,15 +30,17 @@ const FollowUpItem = ({ when, role, items }: { when: string; role: string; items
 
 export const HeartHealthProgramModal = ({ open, onOpenChange }: HeartHealthProgramModalProps) => {
   const oneMonthPlan = {
+    metrics: [
+      { label: "BP control days (SBP <130 / DBP <80)", target: "20 days / 30", unit: "days" },
+      { label: "Zone 2 cardio time", target: "600 min / month", unit: "value" },
+    ],
     behaviors: [
-      { label: "Home blood pressure monitoring", target: "2×", unit: "daily", days: "DAILY" },
-      { label: "Sodium intake", target: "<2000", unit: "mg", days: "DAILY" },
-      { label: "Medication adherence", target: "100%", unit: "doses", days: "DAILY" },
+      { label: "Antihypertensive adherence", target: "26 days / 30", unit: "DAYS" },
+      { label: "Added salt avoidance (≤2 g/day)", target: "22 days / 30", unit: "DAYS" },
+      { label: "Home BP logging (AM/PM)", target: "24 days / 30", unit: "DAYS" },
     ],
     activities: [
-      { label: "Aerobic exercise (Zone 2)", target: "30", unit: "min", days: "5×/WEEK" },
-      { label: "Strength training", target: "20", unit: "min", days: "2×/WEEK" },
-      { label: "Mindfulness/stress reduction", target: "10", unit: "min", days: "DAILY" },
+      { label: "Long walk ≥30 min", target: "8 days / 30", unit: "DAYS" },
     ],
   };
 
@@ -89,18 +90,15 @@ export const HeartHealthProgramModal = ({ open, onOpenChange }: HeartHealthProgr
                 <div>
                   <div className="mb-3 text-sm font-medium flex items-center gap-2">
                     <div className="w-1 h-4 bg-warm-primary rounded-full" />
-                    Behaviors
+                    Metrics
                   </div>
                   <div className="space-y-3">
-                    {oneMonthPlan.behaviors.map((b, i) => (
-                      <div key={i} className="rounded-xl border border-warm-primary/20 bg-warm-primary/5 p-3 flex items-center justify-between gap-3">
-                        <div className="flex-1">
-                          <div className="text-sm font-medium">{b.label}</div>
-                          <div className="text-xs text-muted-foreground">
-                            Target: <span className="font-semibold">{b.target}</span> {b.unit} · {b.days}
-                          </div>
+                    {oneMonthPlan.metrics.map((m, i) => (
+                      <div key={i} className="rounded-xl border border-warm-primary/20 bg-warm-primary/5 p-3">
+                        <div className="text-sm font-medium">{m.label}</div>
+                        <div className="text-xs text-muted-foreground">
+                          Target: <span className="font-semibold">{m.target}</span> · {m.unit}
                         </div>
-                        <Progress value={0} className="w-32" />
                       </div>
                     ))}
                   </div>
@@ -109,18 +107,32 @@ export const HeartHealthProgramModal = ({ open, onOpenChange }: HeartHealthProgr
                 <div>
                   <div className="mb-3 text-sm font-medium flex items-center gap-2">
                     <div className="w-1 h-4 bg-warm-secondary rounded-full" />
+                    Behaviors
+                  </div>
+                  <div className="space-y-3">
+                    {oneMonthPlan.behaviors.map((b, i) => (
+                      <div key={i} className="rounded-xl border border-warm-secondary/20 bg-warm-secondary/5 p-3">
+                        <div className="text-sm font-medium">{b.label}</div>
+                        <div className="text-xs text-muted-foreground">
+                          Target: <span className="font-semibold">{b.target}</span> · {b.unit}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <div className="mb-3 text-sm font-medium flex items-center gap-2">
+                    <div className="w-1 h-4 bg-warm-accent rounded-full" />
                     Activities
                   </div>
                   <div className="space-y-3">
                     {oneMonthPlan.activities.map((a, i) => (
-                      <div key={i} className="rounded-xl border border-warm-secondary/20 bg-warm-secondary/5 p-3 flex items-center justify-between gap-3">
-                        <div className="flex-1">
-                          <div className="text-sm font-medium">{a.label}</div>
-                          <div className="text-xs text-muted-foreground">
-                            Target: <span className="font-semibold">{a.target}</span> {a.unit} · {a.days}
-                          </div>
+                      <div key={i} className="rounded-xl border border-warm-accent/20 bg-warm-accent/5 p-3">
+                        <div className="text-sm font-medium">{a.label}</div>
+                        <div className="text-xs text-muted-foreground">
+                          Target: <span className="font-semibold">{a.target}</span> · {a.unit}
                         </div>
-                        <Progress value={0} className="w-32" />
                       </div>
                     ))}
                   </div>
@@ -141,11 +153,9 @@ export const HeartHealthProgramModal = ({ open, onOpenChange }: HeartHealthProgr
                 <SectionTitle title="Follow-up schedule (through 6 months)" icon={<Clock className="h-5 w-5 text-warm-secondary" />} />
               </CardHeader>
               <CardContent className="pt-4 space-y-0">
-                <FollowUpItem when="Day 2" role="RN call" items={["BP technique check", "Side-effects screen", "Salt diary start"]} />
-                <FollowUpItem when="Week 2" role="Coach" items={["Activity ramp: 3×30 min Zone 2", "Meal sodium audit"]} />
-                <FollowUpItem when="Week 4" role="MD review" items={["Titrate meds if BP ≥130/80", "Order K+/Cr if on ACEI/diuretic"]} />
-                <FollowUpItem when="Month 3" role="MD review" items={["Assess graduation criteria", "ASCVD risk update"]} />
-                <FollowUpItem when="Month 6" role="MD review" items={["Maintenance plan or program close", "Refill sync"]} />
+                <FollowUpItem when="Day 0" role="MD review" items={["Program enrollment", "Baseline assessment", "Medication initiation"]} />
+                <FollowUpItem when="Month 1" role="MD review" items={["Progress check", "Medication titration", "Target adjustment"]} />
+                <FollowUpItem when="Month 6" role="MD review" items={["Graduation assessment", "Maintenance plan", "Program close"]} />
               </CardContent>
             </Card>
 
@@ -172,6 +182,37 @@ export const HeartHealthProgramModal = ({ open, onOpenChange }: HeartHealthProgr
                     </li>
                   ))}
                 </ul>
+              </CardContent>
+            </Card>
+
+            <Card className="rounded-2xl shadow-sm border-warm-success/20">
+              <CardHeader className="pb-2">
+                <SectionTitle title="Graduation Criteria" icon={<Award className="h-5 w-5 text-warm-success" />} />
+              </CardHeader>
+              <CardContent className="pt-4">
+                <div className="text-sm text-muted-foreground">
+                  ≥ 80% of readings &lt;130/80 maintained for 3 consecutive months
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="rounded-2xl shadow-sm border-warm-primary/20 bg-warm-primary/5">
+              <CardHeader className="pb-2">
+                <SectionTitle title="Clinikk Promise" icon={<Target className="h-5 w-5 text-warm-primary" />} />
+              </CardHeader>
+              <CardContent className="pt-4 space-y-2 text-sm">
+                <div className="flex items-start gap-2">
+                  <div className="w-1.5 h-1.5 rounded-full bg-warm-primary mt-1.5 flex-shrink-0" />
+                  <span><span className="font-semibold">Follow-up response</span>: &lt;24 hours for 160 days / 180</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <div className="w-1.5 h-1.5 rounded-full bg-warm-primary mt-1.5 flex-shrink-0" />
+                  <span><span className="font-semibold">Counseling sessions</span>: 20 sessions / 6 months</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <div className="w-1.5 h-1.5 rounded-full bg-warm-primary mt-1.5 flex-shrink-0" />
+                  <span><span className="font-semibold">Medication adjustment</span>: Within 3 days for 5 adjustments / 6 months</span>
+                </div>
               </CardContent>
             </Card>
           </div>
