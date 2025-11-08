@@ -59,10 +59,28 @@ export const ASCVDRiskCard = () => {
         <CardContent className="space-y-4">
           {/* Prominent Score Display */}
           <div className="bg-gradient-to-br from-medical-elevated/10 to-medical-elevated/5 rounded-lg p-6 border border-medical-elevated/20">
-            <div className="text-center space-y-2">
+            <div className="text-center space-y-3">
               <p className="text-sm text-muted-foreground font-medium">Calculated Risk Score</p>
-              <div className="text-5xl font-bold text-medical-elevated">
-                {riskScore}%
+              <div className="flex items-center justify-center gap-4">
+                <div className="text-center">
+                  <div className="text-5xl font-bold text-medical-elevated">
+                    {riskScore}%
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-1">Current</p>
+                </div>
+                <div className="flex flex-col items-center">
+                  <div className="text-medical-info">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M5 12h14M13 5l7 7-7 7"/>
+                    </svg>
+                  </div>
+                </div>
+                <div className="text-center">
+                  <div className="text-4xl font-bold text-medical-success">
+                    4.2%
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-1">Optimal</p>
+                </div>
               </div>
               <Badge variant="outline" className="bg-medical-elevated/10 text-medical-elevated border-medical-elevated/30">
                 Elevated Risk
@@ -98,19 +116,12 @@ export const ASCVDRiskCard = () => {
                   </TooltipContent>
                 </Tooltip>
 
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <div className="p-3 rounded-md bg-secondary hover:bg-secondary/80 transition-colors cursor-help">
-                      <div className="flex justify-between items-center">
-                        <span className="text-sm font-medium">Recommended Action</span>
-                        <span className="text-sm text-primary">Statin + Lifestyle</span>
-                      </div>
-                    </div>
-                  </TooltipTrigger>
-                  <TooltipContent className="max-w-xs">
-                    <p>Consider moderate-to-high intensity statin therapy along with lifestyle modifications including diet, exercise, and smoking cessation</p>
-                  </TooltipContent>
-                </Tooltip>
+                <div className="p-4 rounded-md bg-secondary/50 border border-border">
+                  <h5 className="text-sm font-medium mb-2">Recommended Action</h5>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Consider moderate-to-high intensity statin therapy along with lifestyle modifications including diet, exercise, and smoking cessation. Risk factor optimization can significantly reduce cardiovascular events.
+                  </p>
+                </div>
               </TooltipProvider>
             </div>
           </div>
