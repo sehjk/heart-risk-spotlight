@@ -63,6 +63,12 @@ export default {
           elevated: "hsl(var(--medical-elevated))",
           info: "hsl(var(--medical-info))",
         },
+        warm: {
+          primary: "hsl(var(--warm-primary))",
+          secondary: "hsl(var(--warm-secondary))",
+          accent: "hsl(var(--warm-accent))",
+          success: "hsl(var(--warm-success))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

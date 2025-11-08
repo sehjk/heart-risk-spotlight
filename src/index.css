@@ -44,6 +44,12 @@ All colors MUST be HSL.
     --medical-elevated: 24 95% 53%;
     --medical-info: 197 71% 48%;
     
+    /* Warm patient-friendly colors */
+    --warm-primary: 24 95% 53%;
+    --warm-secondary: 280 65% 60%;
+    --warm-accent: 340 75% 55%;
+    --warm-success: 142 76% 45%;
+    
     /* Shadows */
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
     --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
@@ -99,6 +105,11 @@ All colors MUST be HSL.
     --medical-warning: 38 92% 50%;
     --medical-elevated: 24 95% 53%;
     --medical-info: 197 71% 48%;
+    
+    --warm-primary: 24 95% 53%;
+    --warm-secondary: 280 65% 60%;
+    --warm-accent: 340 75% 55%;
+    --warm-success: 142 76% 45%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
