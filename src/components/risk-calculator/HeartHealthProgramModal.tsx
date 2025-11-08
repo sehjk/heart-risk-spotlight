@@ -49,13 +49,13 @@ export const HeartHealthProgramModal = ({ open, onOpenChange }: HeartHealthProgr
       { label: "BP", target: "<130/80", unit: "mmHg", targetType: "GOAL" },
       { label: "LDL", target: "<100", unit: "mg/dL", targetType: "GOAL" },
       { label: "Weight", target: "-5 to -10", unit: "%", targetType: "GOAL" },
-      { label: "ASCVD risk", target: "<10", unit: "%", targetType: "TARGET" },
+      { label: "ASCVD risk", target: "<7.5", unit: "%", targetType: "TARGET" },
     ],
     behaviors: [
-      { label: "BP monitoring", target: "1×", unit: "daily" },
-      { label: "Sodium", target: "<2000", unit: "mg/day" },
-      { label: "Exercise", target: "150", unit: "min/week" },
-      { label: "Med adherence", target: "≥95%", unit: "" },
+      { label: "BP monitoring", target: "24/30", unit: "days" },
+      { label: "Sodium", target: "22/30", unit: "days" },
+      { label: "Exercise", target: "600", unit: "min/month" },
+      { label: "Med adherence", target: "28/30", unit: "days" },
     ],
   };
 
@@ -71,6 +71,16 @@ export const HeartHealthProgramModal = ({ open, onOpenChange }: HeartHealthProgr
               <DialogTitle className="text-2xl font-semibold">Heart Health Program</DialogTitle>
               <p className="text-sm text-muted-foreground mt-1">Personalized cardiovascular wellness plan</p>
             </div>
+          </div>
+          
+          <div className="mt-4 p-4 rounded-xl bg-warm-success/10 border border-warm-success/30">
+            <div className="flex items-center gap-2 mb-2">
+              <Award className="h-5 w-5 text-warm-success" />
+              <h3 className="text-base font-semibold text-warm-success">Graduation Criteria</h3>
+            </div>
+            <p className="text-sm text-muted-foreground">
+              ≥ 80% of readings &lt;130/80 maintained for 3 consecutive months
+            </p>
           </div>
         </DialogHeader>
 
@@ -185,17 +195,6 @@ export const HeartHealthProgramModal = ({ open, onOpenChange }: HeartHealthProgr
               </CardContent>
             </Card>
 
-            <Card className="rounded-2xl shadow-sm border-warm-success/20">
-              <CardHeader className="pb-2">
-                <SectionTitle title="Graduation Criteria" icon={<Award className="h-5 w-5 text-warm-success" />} />
-              </CardHeader>
-              <CardContent className="pt-4">
-                <div className="text-sm text-muted-foreground">
-                  ≥ 80% of readings &lt;130/80 maintained for 3 consecutive months
-                </div>
-              </CardContent>
-            </Card>
-
             <Card className="rounded-2xl shadow-sm border-warm-primary/20 bg-warm-primary/5">
               <CardHeader className="pb-2">
                 <SectionTitle title="Clinikk Promise" icon={<Target className="h-5 w-5 text-warm-primary" />} />
@@ -203,15 +202,11 @@ export const HeartHealthProgramModal = ({ open, onOpenChange }: HeartHealthProgr
               <CardContent className="pt-4 space-y-2 text-sm">
                 <div className="flex items-start gap-2">
                   <div className="w-1.5 h-1.5 rounded-full bg-warm-primary mt-1.5 flex-shrink-0" />
-                  <span><span className="font-semibold">Follow-up response</span>: &lt;24 hours for 160 days / 180</span>
+                  <span><span className="font-semibold">Follow-ups</span>: 2</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <div className="w-1.5 h-1.5 rounded-full bg-warm-primary mt-1.5 flex-shrink-0" />
-                  <span><span className="font-semibold">Counseling sessions</span>: 20 sessions / 6 months</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-warm-primary mt-1.5 flex-shrink-0" />
-                  <span><span className="font-semibold">Medication adjustment</span>: Within 3 days for 5 adjustments / 6 months</span>
+                  <span><span className="font-semibold">Lifestyle Coaching</span>: 1</span>
                 </div>
               </CardContent>
             </Card>
