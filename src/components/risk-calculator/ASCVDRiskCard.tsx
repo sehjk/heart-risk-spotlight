@@ -117,7 +117,7 @@ export const ASCVDRiskCard = () => {
                 <h4 className="font-semibold text-xs uppercase tracking-wide text-muted-foreground">Input Parameters</h4>
                 
                 <div className="space-y-3 text-xs">
-                  {/* Demographics */}
+                  {/* All Parameters - continuous list */}
                   <div className="space-y-1">
                     {inputParams.demographics.map((param, i) => (
                       <div key={i} className="flex justify-between items-center">
@@ -125,30 +125,18 @@ export const ASCVDRiskCard = () => {
                         <span className="font-medium">{param.value} {param.unit}</span>
                       </div>
                     ))}
-                  </div>
-
-                  <div className="border-t pt-2 space-y-1">
-                    {/* Lipids */}
                     {inputParams.lipids.map((param, i) => (
                       <div key={i} className="flex justify-between items-center">
                         <span className="text-muted-foreground">{param.label}</span>
                         <span className="font-medium">{param.value} {param.unit}</span>
                       </div>
                     ))}
-                  </div>
-
-                  <div className="border-t pt-2 space-y-1">
-                    {/* Vitals */}
                     {inputParams.vitals.map((param, i) => (
                       <div key={i} className="flex justify-between items-center">
                         <span className="text-muted-foreground">{param.label}</span>
                         <span className="font-medium">{param.value} {param.unit}</span>
                       </div>
                     ))}
-                  </div>
-
-                  <div className="border-t pt-2 space-y-1">
-                    {/* Conditions */}
                     {inputParams.conditions.map((param, i) => (
                       <div key={i} className="flex justify-between items-center">
                         <span className="text-muted-foreground">{param.label}</span>
