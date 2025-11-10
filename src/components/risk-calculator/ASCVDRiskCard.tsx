@@ -80,93 +80,84 @@ export const ASCVDRiskCard = () => {
         </CardHeader>
 
         <CardContent className="space-y-6">
-          {/* Input Parameters */}
-          <div className="space-y-4">
-            <h4 className="font-semibold text-sm">Input Parameters</h4>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Demographics */}
-              <div className="space-y-2">
-                <h5 className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Demographics</h5>
-                <div className="rounded-lg border bg-secondary/30 p-3 space-y-2">
-                  {inputParams.demographics.map((param, i) => (
-                    <div key={i} className="flex justify-between items-center text-sm">
-                      <span className="text-muted-foreground">{param.label}</span>
-                      <span className="font-medium">{param.value} {param.unit}</span>
+          {/* Prominent Score Display with Compact Input Parameters */}
+          <div className="bg-gradient-to-br from-medical-elevated/10 to-medical-elevated/5 rounded-lg border border-medical-elevated/20">
+            <div className="grid md:grid-cols-[1fr,280px] gap-6 p-6">
+              {/* Left: Risk Score (Main Focus) */}
+              <div className="text-center space-y-3 flex flex-col justify-center">
+                <p className="text-sm text-muted-foreground font-medium">Calculated Risk Score</p>
+                <div className="flex items-center justify-center gap-4">
+                  <div className="text-center">
+                    <div className="text-5xl font-bold text-medical-elevated">
+                      {riskScore}%
                     </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Lipid Panel */}
-              <div className="space-y-2">
-                <h5 className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Lipid Panel</h5>
-                <div className="rounded-lg border bg-secondary/30 p-3 space-y-2">
-                  {inputParams.lipids.map((param, i) => (
-                    <div key={i} className="flex justify-between items-center text-sm">
-                      <span className="text-muted-foreground">{param.label}</span>
-                      <span className="font-medium">{param.value} {param.unit}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Vitals */}
-              <div className="space-y-2">
-                <h5 className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Blood Pressure</h5>
-                <div className="rounded-lg border bg-secondary/30 p-3 space-y-2">
-                  {inputParams.vitals.map((param, i) => (
-                    <div key={i} className="flex justify-between items-center text-sm">
-                      <span className="text-muted-foreground">{param.label}</span>
-                      <span className="font-medium">{param.value} {param.unit}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Conditions */}
-              <div className="space-y-2">
-                <h5 className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Risk Factors</h5>
-                <div className="rounded-lg border bg-secondary/30 p-3 space-y-2">
-                  {inputParams.conditions.map((param, i) => (
-                    <div key={i} className="flex justify-between items-center text-sm">
-                      <span className="text-muted-foreground">{param.label}</span>
-                      <span className="font-medium">{param.value}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Prominent Score Display */}
-          <div className="bg-gradient-to-br from-medical-elevated/10 to-medical-elevated/5 rounded-lg p-6 border border-medical-elevated/20">
-            <div className="text-center space-y-3">
-              <p className="text-sm text-muted-foreground font-medium">Calculated Risk Score</p>
-              <div className="flex items-center justify-center gap-4">
-                <div className="text-center">
-                  <div className="text-5xl font-bold text-medical-elevated">
-                    {riskScore}%
+                    <p className="text-xs text-muted-foreground mt-1">Current</p>
                   </div>
-                  <p className="text-xs text-muted-foreground mt-1">Current</p>
-                </div>
-                <div className="flex flex-col items-center">
-                  <div className="text-medical-info">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M5 12h14M13 5l7 7-7 7"/>
-                    </svg>
+                  <div className="flex flex-col items-center">
+                    <div className="text-medical-info">
+                      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M5 12h14M13 5l7 7-7 7"/>
+                      </svg>
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-4xl font-bold text-medical-success">
+                      4.2%
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-1">Optimal</p>
                   </div>
                 </div>
-                <div className="text-center">
-                  <div className="text-4xl font-bold text-medical-success">
-                    4.2%
+                <Badge variant="outline" className="bg-medical-elevated/10 text-medical-elevated border-medical-elevated/30 mx-auto">
+                  Elevated Risk
+                </Badge>
+              </div>
+
+              {/* Right: Compact Input Parameters */}
+              <div className="border-l pl-6 space-y-3">
+                <h4 className="font-semibold text-xs uppercase tracking-wide text-muted-foreground">Input Parameters</h4>
+                
+                <div className="space-y-3 text-xs">
+                  {/* Demographics */}
+                  <div className="space-y-1">
+                    {inputParams.demographics.map((param, i) => (
+                      <div key={i} className="flex justify-between items-center">
+                        <span className="text-muted-foreground">{param.label}</span>
+                        <span className="font-medium">{param.value} {param.unit}</span>
+                      </div>
+                    ))}
                   </div>
-                  <p className="text-xs text-muted-foreground mt-1">Optimal</p>
+
+                  <div className="border-t pt-2 space-y-1">
+                    {/* Lipids */}
+                    {inputParams.lipids.map((param, i) => (
+                      <div key={i} className="flex justify-between items-center">
+                        <span className="text-muted-foreground">{param.label}</span>
+                        <span className="font-medium">{param.value} {param.unit}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="border-t pt-2 space-y-1">
+                    {/* Vitals */}
+                    {inputParams.vitals.map((param, i) => (
+                      <div key={i} className="flex justify-between items-center">
+                        <span className="text-muted-foreground">{param.label}</span>
+                        <span className="font-medium">{param.value} {param.unit}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="border-t pt-2 space-y-1">
+                    {/* Conditions */}
+                    {inputParams.conditions.map((param, i) => (
+                      <div key={i} className="flex justify-between items-center">
+                        <span className="text-muted-foreground">{param.label}</span>
+                        <span className="font-medium">{param.value}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
-              <Badge variant="outline" className="bg-medical-elevated/10 text-medical-elevated border-medical-elevated/30">
-                Elevated Risk
-              </Badge>
             </div>
           </div>
 
