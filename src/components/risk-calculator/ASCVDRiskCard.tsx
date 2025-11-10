@@ -11,6 +11,29 @@ export const ASCVDRiskCard = () => {
   const riskScore = 18.5; // Example elevated score
   const isElevated = riskScore > 10;
 
+  // Example input parameters
+  const inputParams = {
+    demographics: [
+      { label: "Age", value: "62", unit: "years" },
+      { label: "Sex", value: "Male", unit: "" },
+      { label: "Race", value: "White", unit: "" },
+    ],
+    lipids: [
+      { label: "Total Cholesterol", value: "245", unit: "mg/dL" },
+      { label: "HDL Cholesterol", value: "38", unit: "mg/dL" },
+      { label: "LDL Cholesterol", value: "165", unit: "mg/dL" },
+    ],
+    vitals: [
+      { label: "Systolic BP", value: "148", unit: "mmHg" },
+      { label: "Diastolic BP", value: "92", unit: "mmHg" },
+    ],
+    conditions: [
+      { label: "On BP Treatment", value: "Yes", unit: "" },
+      { label: "Diabetes", value: "Yes", unit: "" },
+      { label: "Current Smoker", value: "No", unit: "" },
+    ],
+  };
+
   return (
     <>
       <Card className="border-2 border-primary/20 shadow-lg">
@@ -56,7 +79,66 @@ export const ASCVDRiskCard = () => {
           </a>
         </CardHeader>
 
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-6">
+          {/* Input Parameters */}
+          <div className="space-y-4">
+            <h4 className="font-semibold text-sm">Input Parameters</h4>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Demographics */}
+              <div className="space-y-2">
+                <h5 className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Demographics</h5>
+                <div className="rounded-lg border bg-secondary/30 p-3 space-y-2">
+                  {inputParams.demographics.map((param, i) => (
+                    <div key={i} className="flex justify-between items-center text-sm">
+                      <span className="text-muted-foreground">{param.label}</span>
+                      <span className="font-medium">{param.value} {param.unit}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Lipid Panel */}
+              <div className="space-y-2">
+                <h5 className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Lipid Panel</h5>
+                <div className="rounded-lg border bg-secondary/30 p-3 space-y-2">
+                  {inputParams.lipids.map((param, i) => (
+                    <div key={i} className="flex justify-between items-center text-sm">
+                      <span className="text-muted-foreground">{param.label}</span>
+                      <span className="font-medium">{param.value} {param.unit}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Vitals */}
+              <div className="space-y-2">
+                <h5 className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Blood Pressure</h5>
+                <div className="rounded-lg border bg-secondary/30 p-3 space-y-2">
+                  {inputParams.vitals.map((param, i) => (
+                    <div key={i} className="flex justify-between items-center text-sm">
+                      <span className="text-muted-foreground">{param.label}</span>
+                      <span className="font-medium">{param.value} {param.unit}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Conditions */}
+              <div className="space-y-2">
+                <h5 className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Risk Factors</h5>
+                <div className="rounded-lg border bg-secondary/30 p-3 space-y-2">
+                  {inputParams.conditions.map((param, i) => (
+                    <div key={i} className="flex justify-between items-center text-sm">
+                      <span className="text-muted-foreground">{param.label}</span>
+                      <span className="font-medium">{param.value}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* Prominent Score Display */}
           <div className="bg-gradient-to-br from-medical-elevated/10 to-medical-elevated/5 rounded-lg p-6 border border-medical-elevated/20">
             <div className="text-center space-y-3">
@@ -86,15 +168,6 @@ export const ASCVDRiskCard = () => {
                 Elevated Risk
               </Badge>
             </div>
-          </div>
-
-          {/* Instructions */}
-          <div className="space-y-2">
-            <h4 className="font-semibold text-sm">Instructions</h4>
-            <p className="text-sm text-muted-foreground">
-              This score was calculated using patient age, sex, race, total cholesterol, 
-              HDL cholesterol, systolic blood pressure, and current medications.
-            </p>
           </div>
 
           {/* Interactive Results */}
